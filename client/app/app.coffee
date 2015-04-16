@@ -5,7 +5,9 @@ angular.module 'jsrolApp', [
   'ngResource',
   'ngSanitize',
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'mongolabResourceHttp',
+  'datatables'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider
@@ -35,3 +37,5 @@ angular.module 'jsrolApp', [
   $rootScope.$on '$stateChangeStart', (event, next) ->
     Auth.isLoggedInAsync (loggedIn) ->
       $location.path "/login" if next.authenticate and not loggedIn
+
+.constant('MONGOLAB_CONFIG',{API_KEY:'50fc32b5e4b082da891d7e6a', DB_NAME:'grol'});
