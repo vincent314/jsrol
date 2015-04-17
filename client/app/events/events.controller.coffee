@@ -1,13 +1,13 @@
 'use strict'
 
 angular.module 'jsrolApp'
-.controller 'EventsCtrl', ($scope,Events,DTOptionsBuilder, DTColumnBuilder) ->
+.controller 'EventsCtrl', ($scope,Event,DTOptionsBuilder, DTColumnBuilder) ->
   self = this
 
   $scope.dtOptions = DTOptionsBuilder.fromFnPromise ()->
     # list all events
     options = {$sort:{"dateTime":-1}}
-    Events.all(options)
+    Event.query().$promise
 
   $scope.dtColumns = [
     DTColumnBuilder.newColumn('name').withTitle('NAME')
