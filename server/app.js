@@ -15,6 +15,9 @@ var config = require('./config/environment');
 console.log('mongo uri = ' + config.mongo.uri);
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
+// Debug Mongoose
+mongoose.set('debug', true);
+
 // Populate DB with sample data
 if(config.seedDB) { require('./config/seed'); }
 
