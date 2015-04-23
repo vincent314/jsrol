@@ -1,43 +1,28 @@
 .container-fluid
 
-    //.panel-group#accordion(ng-show="events.length>0",role="tablist",aria-multiselectable="true")
-    //    .panel.panel-default
-    //        .panel-heading#heading-one(role="tab")
-    //        h4.panel-title
-    //            span.span2 Date
-    //            span.span2 Nom
-    //            span.span2 Type
-    //            span.span1 Boucles
+    accordion(close-others="true")
+        div(ng-repeat="e in events")
+            accordion-group
+                accordion-heading
+                    | {{e.dateTime | date:'EEEE dd MMMM yyyy'}}
+                    .label.label-danger(ng-click="pop($event)", ng-show="e.status == 'CANCELED'",
+                    data-placement="right",data-title="Annulation",data-trigger="manual",
+                    data-content="La commission a décidé d'annuler la randonnée pour des raisons météorologiques ou de sécurité.",ng-cloak)
+                        | Annulée
+                    .label.label-primary(ng-click="pop($event)",ng-show="e.status == 'CONFIRMED'",
+                    data-placement="right",data-title="Confirmation",data-trigger="manual",
+                    data-content="La commission a confirmé le maintien de la randonnée.", ng-cloak)
+                        | Confirmée
 
-    .panel-group#accordion(role="tablist", aria-multiselectable="false")
-        .panel.panel-default(ng-repeat="e in events")
-            .panel-heading(role="tab",id="heading_{{$index}}")
-                .row.panel-title
-                    .col-xs-4
-                        div {{e.dateTime | date:'EEEE dd MMMM yyyy'}}
-                        .label.label-important(ng-click="pop($event)", ng-show="e.status == 'CANCELED'",
-                        data-placement="right",data-title="Annulation",data-trigger="manual",
-                        data-content="La commission a décidé d'annuler la randonnée pour des raisons météorologiques ou de sécurité.",ng-cloak)
-                            | Annulée
-                        .label.label-info(ng-click="pop($event)",ng-show="e.status == 'CONFIRMED'",
-                        data-placement="right",data-title="Confirmation",data-trigger="manual",
-                        data-content="La commission a confirmé le maintien de la randonnée.", ng-cloak)
-                            | Confirmée
+                    | {{e.name}}
+                    | {{types[e.type]}}
 
-                    .col-xs-4
-                        a.collapsed(data-toggle="collapse",data-parent="#accordion",href="#collapse_{{$index}}",aria-expanded="false",aria-controls="collapse_{{$index}}")
-                            | {{e.name}}
-
-                    .col-xs-3 {{types[e.type]}}
-
-                    .col-xs-1
-                        a(ng-click="onShowMap(e.loop1)")
-                            span.badge.badge-success(ng-show="e.loop1") 1
-                        a(ng-click="onShowMap(e.loop2)")
-                            span.badge.badge-success(ng-show="e.loop2") 2
-                        a(ng-click="onShowMap(e.loop3)")
-                            span.badge.badge-success(ng-show="e.loop3") 3
-            .panel-collapse.collapse(id="collapse_{{$index}}",role="tabpanel",aria-labelledby="heading_{{$index}}")
-                .panel-body
+                    a(ng-click="onShowMap(e.loop1)")
+                        span.badge.badge-success(ng-show="e.loop1") 1
+                    a(ng-click="onShowMap(e.loop2)")
+                        span.badge.badge-success(ng-show="e.loop2") 2
+                    a(ng-click="onShowMap(e.loop3)")
+                        span.badge.badge-success(ng-show="e.loop3") 3
+                p
                     | {{e.description}}
                     //span(ng-bind-html-unsafe="e.description")
