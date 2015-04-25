@@ -1,28 +1,3 @@
 .container-fluid
 
-    accordion(close-others="true")
-        div(ng-repeat="e in events")
-            accordion-group
-                accordion-heading
-                    | {{e.dateTime | date:'EEEE dd MMMM yyyy'}}
-                    .label.label-danger(ng-click="pop($event)", ng-show="e.status == 'CANCELED'",
-                    data-placement="right",data-title="Annulation",data-trigger="manual",
-                    data-content="La commission a décidé d'annuler la randonnée pour des raisons météorologiques ou de sécurité.",ng-cloak)
-                        | Annulée
-                    .label.label-primary(ng-click="pop($event)",ng-show="e.status == 'CONFIRMED'",
-                    data-placement="right",data-title="Confirmation",data-trigger="manual",
-                    data-content="La commission a confirmé le maintien de la randonnée.", ng-cloak)
-                        | Confirmée
-
-                    | {{e.name}}
-                    | {{types[e.type]}}
-
-                    a(ng-click="onShowMap(e.loop1)")
-                        span.badge.badge-success(ng-show="e.loop1") 1
-                    a(ng-click="onShowMap(e.loop2)")
-                        span.badge.badge-success(ng-show="e.loop2") 2
-                    a(ng-click="onShowMap(e.loop3)")
-                        span.badge.badge-success(ng-show="e.loop3") 3
-                p
-                    | {{e.description}}
-                    //span(ng-bind-html-unsafe="e.description")
+    table(id="eventsTable", datatable="", dt-options="dtOptions", dt-columns="dtColumns")

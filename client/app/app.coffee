@@ -6,7 +6,8 @@ angular.module 'jsrolApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'datatables'
+  'datatables',
+  'datatables.bootstrap'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider
