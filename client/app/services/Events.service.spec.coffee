@@ -1,14 +1,14 @@
 'use strict'
 
-describe 'Service: Events', ->
+describe 'Service: Event', ->
 
   # load the service's module
   beforeEach module 'jsrolApp'
 
   # instantiate service
-  Events = undefined
-  beforeEach inject (_Events_) ->
-    Events = _Events_
+  Event = undefined
+  beforeEach inject (_Event_) ->
+    Event = _Event_
 
   it 'should do something', ->
-    expect(!!Events).toBe true
+    expect(!!Event).toBe true
