@@ -1,6 +1,6 @@
 'use strict'
 
-ddescribe 'Controller: EventsCtrl', ->
+describe 'Controller: EventsCtrl', ->
 
 # load the controller's module
   beforeEach module 'jsrolApp'
