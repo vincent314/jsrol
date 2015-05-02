@@ -7,7 +7,8 @@ angular.module 'jsrolApp', [
   'ui.router',
   'ui.bootstrap',
   'datatables',
-  'datatables.bootstrap'
+  'datatables.bootstrap',
+  'loop.button'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider

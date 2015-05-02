@@ -2,7 +2,7 @@
 
 class EventsCtrl
 
-  constructor: (@$scope, Event, DTOptionsBuilder, DTColumnBuilder) ->
+  constructor: (@$scope, @$compile, @$rootScope, Event, DTOptionsBuilder, DTColumnBuilder) ->
     @detailRows = []
 
     @$scope.dtOptions = DTOptionsBuilder.fromFnPromise ()->
@@ -14,13 +14,14 @@ class EventsCtrl
       .$promise
     .withOption('paging', false)
     .withOption('searching', false)
-    .withOption('rowCallback', _.bind(@rowCallback,@))
+    .withOption('rowCallback', _.bind(@rowCallback, @))
     .withBootstrap()
 
     @$scope.dtColumns = [
       DTColumnBuilder.newColumn('dateTime').withTitle('DATE')
       DTColumnBuilder.newColumn('name').withTitle('NOM')
       DTColumnBuilder.newColumn('type').withTitle('TYPE').withOption('defaultContent', '')
+      DTColumnBuilder.newColumn('loop1').withTitle('BOUCLES').withOption('defaultContent', '').renderWith _.bind(@renderLoops,@)
     ]
 
 #
@@ -62,10 +63,33 @@ class EventsCtrl
     if idx == -1
       @detailRows.push tr.attr('id')
 
+
+  renderLoop: (l,idx)->
+    scope = @$rootScope.$new()
+    _.extend scope,
+      {
+        label:idx,
+        loop:l
+      }
+    element = @$compile('<loop label="label" loop="loop"></loop>')(scope)
+    scope.$digest()
+    return element.html()
+
+  renderLoops: (data,type,full)->
+    self = @
+    loops = []
+    if full.loop1 then loops.push full.loop1
+    if full.loop2 then loops.push full.loop2
+    if full.loop3 then loops.push full.loop3
+    content = _(loops).map (l,idx)->
+      self.renderLoop l,idx
+    .join(' ')
+    return "<div>#{content}</div>"
+
 #
 # Register Controler in Angular
 #
-EventsCtrl.$inject = ['$scope', 'Event', 'DTOptionsBuilder', 'DTColumnBuilder', '$sce']
+EventsCtrl.$inject = ['$scope', '$compile', '$rootScope', 'Event', 'DTOptionsBuilder', 'DTColumnBuilder']
 angular.module 'jsrolApp'
 .controller 'EventsCtrl', EventsCtrl
 

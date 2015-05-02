@@ -6,6 +6,7 @@
 'use strict';
 
 var Event = require('../api/event/event.model');
+var Track = require('../api/track/track.model');
 var Thing = require('../api/thing/thing.model');
 var User = require('../api/user/user.model');
 var readline = require('readline');
@@ -55,14 +56,26 @@ User.find({}).remove(function () {
 Event.find({}).remove(function () {
     var events = [];
     var rl = readline.createInterface({
-        input: fs.createReadStream('./data/grol_export.json'),
+        input: fs.createReadStream('./data/events.json'),
         output: process.stdout
     });
     rl.on('line', function (line) {
         var event = JSON.parse(line);
         delete event._id;
         event.dateTime = new Date(event.dateTime.$date);
-        console.log(event);
         Event.create(event);
     });
+});
+
+Track.find({}).remove(function () {
+  var tracks = [];
+  var rl = readline.createInterface({
+    input: fs.createReadStream('./data/tracks.json'),
+    output: process.stdout
+  });
+  rl.on('line', function (line) {
+    var track = JSON.parse(line);
+    delete track._id;
+    Track.create(track);
+  });
 });
