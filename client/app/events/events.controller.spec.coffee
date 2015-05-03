@@ -4,7 +4,7 @@ describe 'Controller: EventsCtrl', ->
 
 # load the controller's module
   beforeEach module 'jsrolApp'
-  beforeEach module 'components/loop/loop.directive.html'
+  beforeEach module 'app/loopDirective/loopDirective.html'
   EventsCtrl = undefined
   scope = undefined
   dtOptions = undefined

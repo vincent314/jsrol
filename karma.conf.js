@@ -25,6 +25,7 @@ module.exports = function(config) {
       'client/bower_components/angular-datatables/dist/angular-datatables.js',
       'client/bower_components/angularjs-mongolab/src/angular-mongolab.js',
       'client/bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',
+      'client/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
       'client/app/app.js',
       'client/app/app.coffee',
       'client/app/**/*.js',

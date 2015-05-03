@@ -71,7 +71,8 @@ class EventsCtrl
         label:idx,
         loop:l
       }
-    element = @$compile('<loop label="label" loop="loop"></loop>')(scope)
+    console.log l
+    element = @$compile('<loop-directive label="label" loop="loop"></loop-directive>')(scope)
     scope.$digest()
     return element.html()
 
