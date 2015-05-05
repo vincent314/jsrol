@@ -21,7 +21,8 @@ class EventsCtrl
       DTColumnBuilder.newColumn('dateTime').withTitle('DATE')
       DTColumnBuilder.newColumn('name').withTitle('NOM')
       DTColumnBuilder.newColumn('type').withTitle('TYPE').withOption('defaultContent', '')
-      DTColumnBuilder.newColumn('loop1').withTitle('BOUCLES').withOption('defaultContent', '').renderWith _.bind(@renderLoops,@)
+      DTColumnBuilder.newColumn('loop1').withTitle('BOUCLES').withOption('defaultContent',
+        '').renderWith _.bind(@renderLoops, @)
     ]
 
 #
@@ -64,26 +65,22 @@ class EventsCtrl
       @detailRows.push tr.attr('id')
 
 
-  renderLoop: (l,idx)->
+  renderLoop: (l, idx)->
     scope = @$rootScope.$new()
-    _.extend scope,
-      {
-        label:idx,
-        loop:l
-      }
-    console.log l
-    element = @$compile('<loop-directive label="label" loop="loop"></loop-directive>')(scope)
+    scope.label = idx
+    scope.loop = l
+    element = @$compile('<div><loop-directive label="{{label}}" loop="{{loop}}"></loop-directive></div>')(scope)
     scope.$digest()
     return element.html()
 
-  renderLoops: (data,type,full)->
+  renderLoops: (data, type, full)->
     self = @
     loops = []
     if full.loop1 then loops.push full.loop1
     if full.loop2 then loops.push full.loop2
     if full.loop3 then loops.push full.loop3
-    content = _(loops).map (l,idx)->
-      self.renderLoop l,idx
+    content = _(loops).map (l, idx)->
+      self.renderLoop l, idx
     .join(' ')
     return "<div>#{content}</div>"
 

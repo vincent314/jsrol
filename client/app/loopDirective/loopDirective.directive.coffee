@@ -2,21 +2,23 @@
 
 class LoopDirectiveController
 
-  constructor: ($scope,$location)->
-    $scope.loopClick = @loopClick
+  constructor: ($scope)->
+    @label = $scope.label
+    @loop = $scope.loop
 
   loopClick: (l)->
     console.log l
-#    $location.url()
 
 
-LoopDirectiveController.$inject = ['$scope','$location']
+LoopDirectiveController.$inject = ['$scope']
 angular.module 'jsrolApp'
+.controller 'LoopDirectiveController', LoopDirectiveController
 .directive 'loopDirective', ->
   templateUrl: 'app/loopDirective/loopDirective.html'
   restrict: 'E'
-  controller: LoopDirectiveController
+  controller: LoopDirectiveController,
+  controllerAs: 'ctrl',
   scope:{
-    loop:'='
-    label:'='
+    loop:'@'
+    label:'@'
   }
