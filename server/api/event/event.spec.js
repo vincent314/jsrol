@@ -4,6 +4,8 @@ var expect = require('chai').expect;
 var app = require('../../app');
 var request = require('supertest');
 var Event = require('./event.model');
+var Q = require('q');
+var _ = require('lodash');
 
 describe('GET /api/events', function () {
 
@@ -55,4 +57,88 @@ describe('GET /api/events', function () {
      });
      });
      */
+
+    describe('should find events in future and in the past', function () {
+        var promise;
+
+        before(function (done) {
+            //   Clear users before testing
+            Event.remove().exec().then(function () {
+                done();
+            });
+        });
+
+        beforeEach(function () {
+            var events = [new Event({
+                "name": "Event2",
+                "dateTime": "2015-01-01T00:00:00.000Z"
+            }), new Event({
+                "name": "Event1",
+                "dateTime": "2014-01-01T00:00:00.000Z"
+            })];
+
+            var promises = _(events).map(function (event) {
+                return Q.ninvoke(event, 'save');
+            }).value();
+
+            promise = Q.all(promises);
+        });
+
+        it('should find events in the future', function (done) {
+            promise.then(function (results) {
+                expect(results.length).to.equal(2);
+                var r = request(app)
+                    .get('/api/events?fromDate=2014-06-01T00:00:00')
+                    .expect(200)
+                    .expect('Content-Type', /json/);
+                return Q.ninvoke(r, 'end');
+            }).then(function (res) {
+                res.body.should.be.instanceof(Array);
+                res.body.length.should.equal(1);
+                res.body[0].name.should.equal('Event2');
+                done();
+            }).catch(function (err) {
+                console.log(err);
+                done(err);
+            });
+        });
+
+        it('should find events in the past', function (done) {
+            promise.then(function (results) {
+                expect(results.length).to.equal(2);
+                var r = request(app)
+                    .get('/api/events?toDate=2014-06-01T00:00:00')
+                    .expect(200)
+                    .expect('Content-Type', /json/);
+                return Q.ninvoke(r, 'end');
+            }).then(function (res) {
+                res.body.should.be.instanceof(Array);
+                res.body.length.should.equal(1);
+                res.body[0].name.should.equal('Event1');
+                done();
+            }).catch(function (err) {
+                console.log(err);
+                done(err);
+            });
+        });
+        it('should find all events sorted by date', function (done) {
+            promise.then(function (results) {
+                expect(results.length).to.equal(2);
+                var r = request(app)
+                    .get('/api/events')
+                    .expect(200)
+                    .expect('Content-Type', /json/);
+                return Q.ninvoke(r, 'end');
+            }).then(function (res) {
+                res.body.should.be.instanceof(Array);
+                res.body.length.should.equal(2);
+                res.body[0].name.should.equal('Event1');
+                res.body[1].name.should.equal('Event2');
+                done();
+            }).catch(function (err) {
+                console.log(err);
+                done(err);
+            });
+        });
+    });
 });

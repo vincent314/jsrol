@@ -10,6 +10,9 @@ exports.index = function(req, res) {
   if(req.query.fromDate){
     query = query.where('dateTime').gte(req.query.fromDate);
   }
+  if(req.query.toDate){
+    query = query.where('dateTime').lte(req.query.toDate);
+  }
   if(req.query.limit){
     query = query.limit(Number(req.query.limit));
   }
