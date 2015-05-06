@@ -1,2 +1,5 @@
 .container-fluid
     table(id="eventsTable", datatable="", dt-options="dtOptions", dt-columns="dtColumns")
+
+    script
+        | loopClick = function(l){ window.location='/#/map/' + l; return false; }

@@ -13,8 +13,9 @@ class EventsCtrl
       )
       .$promise
     .withOption('paging', false)
-    .withOption('searching', false)
-    .withOption('rowCallback', _.bind(@rowCallback, @))
+    .withOption 'searching', false
+    .withOption 'stateSave', true
+    .withOption 'rowCallback', _.bind(@rowCallback, @)
     .withBootstrap()
 
     @$scope.dtColumns = [
@@ -66,12 +67,7 @@ class EventsCtrl
 
 
   renderLoop: (l, idx)->
-    scope = @$rootScope.$new()
-    scope.label = idx
-    scope.loop = l
-    element = @$compile('<div><loop-directive label="{{label}}" loop="{{loop}}"></loop-directive></div>')(scope)
-    scope.$digest()
-    return element.html()
+    "<button class='btn btn-success' onclick=\"loopClick('#{l}')\" type='button'>#{idx}</button>"
 
   renderLoops: (data, type, full)->
     self = @

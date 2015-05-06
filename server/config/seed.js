@@ -12,6 +12,7 @@ var User = require('../api/user/user.model');
 var readline = require('readline');
 var fs = require('fs');
 var _ = require('lodash');
+var mongoose = require('mongoose');
 
 Thing.find({}).remove(function () {
     Thing.create({
@@ -75,7 +76,7 @@ Track.find({}).remove(function () {
   });
   rl.on('line', function (line) {
     var track = JSON.parse(line);
-    delete track._id;
+      track._id = new mongoose.Types.ObjectId(track._id.$oid);
     Track.create(track);
   });
 });

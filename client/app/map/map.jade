@@ -1,2 +1,3 @@
 .container-fluid
-    leaflet(defaults="defaults",center="center",height="480px",width="640px")
+    button.btn.btn-success(type="button",ng-click="ctrl.backToEvents()") Retour
+    leaflet(defaults="defaults",center="ctrl.center",height="480px",width="640px")
