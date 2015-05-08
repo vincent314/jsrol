@@ -2,6 +2,7 @@
 
 class EventsCtrl
 
+  @$inject = ['$scope', '$compile', '$rootScope', 'Event', 'DTOptionsBuilder', 'DTColumnBuilder']
   constructor: (@$scope, @$compile, @$rootScope, Event, DTOptionsBuilder, DTColumnBuilder) ->
     @detailRows = []
 
@@ -26,6 +27,8 @@ class EventsCtrl
         '').renderWith _.bind(@renderLoops, @)
     ]
 
+    window.loopClick = @loopClick
+
 #
 # format event details
 #
@@ -42,6 +45,11 @@ class EventsCtrl
     $('td', nRow).bind 'click', () ->
       self.$scope.$apply ()->
         self.clickHandler($(nRow), aData)
+
+    $('td button',nRow).bind 'click', (event) ->
+      mapId = $(event.target).data('map')
+      event.stopPropagation();
+      window.location = "/map/#{mapId}"
     return nRow
 
 #
@@ -67,7 +75,7 @@ class EventsCtrl
 
 
   renderLoop: (l, idx)->
-    "<button class='btn btn-success' onclick=\"loopClick('#{l}')\" type='button'>#{idx}</button>"
+    "<button class='btn btn-success loop-button' data-map='#{l}' type='button'>#{idx}</button>"
 
   renderLoops: (data, type, full)->
     self = @
@@ -76,14 +84,13 @@ class EventsCtrl
     if full.loop2 then loops.push full.loop2
     if full.loop3 then loops.push full.loop3
     content = _(loops).map (l, idx)->
-      self.renderLoop l, idx
+      self.renderLoop l, idx+1
     .join(' ')
     return "<div>#{content}</div>"
 
 #
 # Register Controler in Angular
 #
-EventsCtrl.$inject = ['$scope', '$compile', '$rootScope', 'Event', 'DTOptionsBuilder', 'DTColumnBuilder']
 angular.module 'jsrolApp'
 .controller 'EventsCtrl', EventsCtrl
 

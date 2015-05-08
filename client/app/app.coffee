@@ -12,7 +12,7 @@ angular.module 'jsrolApp', [
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider
-  .otherwise '/'
+  .otherwise '/events'
 
   $locationProvider.html5Mode true
   $httpProvider.interceptors.push 'authInterceptor'

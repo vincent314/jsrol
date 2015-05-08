@@ -8,8 +8,8 @@ class MapCtrl
       color: '#800000'
       opacity: 1
     @center =
-      lat: 51.505
-      lng: -0.09
+      lat: 50.62925
+      lng: 3.057256
       zoom: 8
 
     leafletData.getMap().then (map)->
