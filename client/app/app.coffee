@@ -17,14 +17,17 @@ angular.module 'jsrolApp', [
   $locationProvider.html5Mode true
   $httpProvider.interceptors.push 'authInterceptor'
 
+#  Leaflet configuration
+  L.Icon.Default.imagePath = '/bower_components/leaflet/dist/images'
+
 .factory 'authInterceptor', ($rootScope, $q, $cookieStore, $location) ->
-  # Add authorization token to headers
+# Add authorization token to headers
   request: (config) ->
     config.headers = config.headers or {}
     config.headers.Authorization = 'Bearer ' + $cookieStore.get 'token' if $cookieStore.get 'token'
     config
 
-  # Intercept 401s and redirect you to login
+# Intercept 401s and redirect you to login
   responseError: (response) ->
     if response.status is 401
       $location.path '/login'
@@ -34,7 +37,7 @@ angular.module 'jsrolApp', [
     $q.reject response
 
 .run ($rootScope, $location, Auth) ->
-  # Redirect to login if route requires auth and you're not logged in
+# Redirect to login if route requires auth and you're not logged in
   $rootScope.$on '$stateChangeStart', (event, next) ->
     Auth.isLoggedInAsync (loggedIn) ->
       $location.path "/login" if next.authenticate and not loggedIn
