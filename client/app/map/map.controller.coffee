@@ -1,7 +1,7 @@
 'use strict'
 
 class MapCtrl
-  constructor: (leafletData, $stateParams,@$state)->
+  constructor: (leafletData, $stateParams, @$state)->
     @maxZoom = 14
     @path =
       weight: 10
@@ -20,6 +20,6 @@ class MapCtrl
   backToEvents: ()->
     @$state.go 'events'
 
-MapCtrl.$inject = ['leafletData', '$stateParams','$state']
+MapCtrl.$inject = ['leafletData', '$stateParams', '$state']
 angular.module 'jsrolApp'
 .controller 'MapCtrl', MapCtrl
