@@ -4,7 +4,6 @@ describe 'Controller: EventsCtrl', ->
 
 # load the controller's module
   beforeEach module 'jsrolApp'
-  beforeEach module 'app/loopDirective/loopDirective.html'
   EventsCtrl = undefined
   scope = undefined
   dtOptions = undefined
@@ -21,12 +20,11 @@ describe 'Controller: EventsCtrl', ->
       $scope: scope
 
   it 'should configure DataTables', ->
-    expect(dtOptions.withOption.callCount).toBe(3)
+    expect(dtOptions.withOption.callCount).toBe(4)
     expect(dtOptions.withBootstrap.callCount).toBe(1)
     expect(scope.dtColumns.length).toBe(4)
     expect(_.pick(scope.dtColumns[0], ['mData', 'sTitle'])).toEqual {mData: 'dateTime', sTitle: 'DATE'}
     expect(_.pick(scope.dtColumns[1], ['mData', 'sTitle'])).toEqual {mData: 'name', sTitle: 'NOM'}
-    expect(_.pick(scope.dtColumns[2], ['mData', 'sTitle'])).toEqual {mData: 'type', sTitle: 'TYPE'}
 
   it 'should bind click event', ->
     spyOn($.fn, 'DataTable').andReturn 'blah'
