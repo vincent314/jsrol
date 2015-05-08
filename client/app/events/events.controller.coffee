@@ -6,6 +6,7 @@ class EventsCtrl
   constructor: (@$scope, @$compile, @$rootScope, Event, DTOptionsBuilder, DTColumnBuilder) ->
     @detailRows = []
 
+    # Get data from REST service
     @$scope.dtOptions = DTOptionsBuilder.fromFnPromise ()->
       Event.query(
         {
@@ -13,16 +14,18 @@ class EventsCtrl
         }
       )
       .$promise
-    .withOption('paging', false)
+    .withOption 'paging', false
+    .withOption 'sort', false
     .withOption 'searching', false
     .withOption 'stateSave', true
     .withOption 'rowCallback', _.bind(@rowCallback, @)
     .withBootstrap()
 
     @$scope.dtColumns = [
-      DTColumnBuilder.newColumn('dateTime').withTitle('DATE')
+      DTColumnBuilder.newColumn('dateTime').withTitle('DATE').withOption('sortable',false).renderWith (data)->
+        moment.locale('fr')
+        moment(data).format('LL')
       DTColumnBuilder.newColumn('name').withTitle('NOM')
-      DTColumnBuilder.newColumn('type').withTitle('TYPE').withOption('defaultContent', '')
       DTColumnBuilder.newColumn('loop1').withTitle('BOUCLES').withOption('defaultContent',
         '').renderWith _.bind(@renderLoops, @)
     ]
