@@ -463,7 +463,8 @@ module.exports = function (grunt) {
             options: {
                 coverageFolder: 'output/coverage-server',
                 reporter: 'spec',
-                mask: '*.spec.js'
+                mask: '*.spec.js',
+                reportFormats: ['html','text']
             },
             src: ['server/**/*.spec.js']
         },

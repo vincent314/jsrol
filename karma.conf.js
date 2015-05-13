@@ -42,7 +42,8 @@ module.exports = function (config) {
         preprocessors: {
             '**/*.jade': 'ng-jade2js',
             '**/*.html': 'ng-html2js',
-            '**/*.coffee': 'coffee',
+            '**/!(*.spec).coffee': ['coffee', 'coverage'],
+            '**/*.spec.coffee': ['coffee']
         },
 
         ngHtml2JsPreprocessor: {
@@ -81,6 +82,20 @@ module.exports = function (config) {
 
         // Continuous Integration mode
         // if true, it capture browsers, run tests and exit
-        singleRun: false
+        singleRun: false,
+
+        reporters: ['coverage'],
+
+        coverageReporter: {
+            reporters: [
+                {
+                    type: 'html',
+                    dir: 'output/coverage-client'
+                },
+                {
+                    type: 'text'
+                }
+            ]
+        }
     });
 };
