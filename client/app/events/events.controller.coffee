@@ -18,6 +18,7 @@ class EventsCtrl
     .withOption 'sort', false
     .withOption 'searching', false
     .withOption 'stateSave', true
+    .withOption 'info', false
     .withOption 'rowCallback', _.bind(@rowCallback, @)
     .withBootstrap()
 
@@ -33,9 +34,9 @@ class EventsCtrl
     window.loopClick = @loopClick
 
 #
-# format event details
+# render event details
 #
-  format: (d)-> d.description || ''
+  renderDetails: (d)-> d.description || ''
 
 #
 # Build callback
@@ -70,7 +71,7 @@ class EventsCtrl
       @detailRows.splice idx, 1
     else
       tr.addClass 'details'
-      row.child(this.format(data)).show()
+      row.child(this.renderDetails(data)).show()
 
     #    Add to the 'open' array
     if idx == -1

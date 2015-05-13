@@ -20,9 +20,8 @@ describe 'Controller: EventsCtrl', ->
       $scope: scope
 
   it 'should configure DataTables', ->
-    expect(dtOptions.withOption.callCount).toBe(4)
     expect(dtOptions.withBootstrap.callCount).toBe(1)
-    expect(scope.dtColumns.length).toBe(4)
+    expect(scope.dtColumns.length).toBe(3)
     expect(_.pick(scope.dtColumns[0], ['mData', 'sTitle'])).toEqual {mData: 'dateTime', sTitle: 'DATE'}
     expect(_.pick(scope.dtColumns[1], ['mData', 'sTitle'])).toEqual {mData: 'name', sTitle: 'NOM'}
 
