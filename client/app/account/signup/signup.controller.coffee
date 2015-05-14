@@ -1,5 +1,6 @@
 'use strict'
 
+# TODO : To delete
 angular.module 'jsrolApp'
 .controller 'SignupCtrl', ($scope, Auth, $location, $window) ->
   $scope.user = {}

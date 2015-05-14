@@ -79,7 +79,7 @@ class EventsCtrl
 
 
   renderLoop: (l, idx)->
-    "<button class='btn btn-success loop-button' data-map='#{l}' type='button'>#{idx}</button>"
+    "<button class='btn btn-success btn-sm loop-button' data-map='#{l}' type='button'>#{idx}</button>"
 
   renderLoops: (data, type, full)->
     self = @

@@ -1,6 +1,8 @@
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
+
+// TODO : To be deleted
 exports.setup = function (User, config) {
   passport.use(new LocalStrategy({
       usernameField: 'email',
