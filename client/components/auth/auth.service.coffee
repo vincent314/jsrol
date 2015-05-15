@@ -43,51 +43,6 @@ angular.module 'jsrolApp'
 
 
   ###
-  Create a new user
-
-  @param  {Object}   user     - user info
-  @param  {Function} callback - optional
-  @return {Promise}
-  ###
-  createUser: (user, callback) ->
-    User.save user,
-      (data) ->
-        $cookieStore.put 'token', data.token
-        currentUser = User.get()
-        callback? user
-
-      , (err) =>
-        @logout()
-        callback? err
-
-    .$promise
-
-
-  ###
-  Change password
-
-  @param  {String}   oldPassword
-  @param  {String}   newPassword
-  @param  {Function} callback    - optional
-  @return {Promise}
-  ###
-  changePassword: (oldPassword, newPassword, callback) ->
-    User.changePassword
-      id: currentUser._id
-    ,
-      oldPassword: oldPassword
-      newPassword: newPassword
-
-    , (user) ->
-      callback? user
-
-    , (err) ->
-      callback? err
-
-    .$promise
-
-
-  ###
   Gets all available info on authenticated user
 
   @return {Object} user
@@ -126,6 +81,7 @@ angular.module 'jsrolApp'
   @return {Boolean}
   ###
   isAdmin: ->
+    # TODO : use isAdmin boolean instead
     currentUser.role is 'admin'
 
 
