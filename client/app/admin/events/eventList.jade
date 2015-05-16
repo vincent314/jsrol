@@ -1,0 +1,15 @@
+h1 Liste des évènements
+
+table.table.table-striped
+    thead
+        tr
+            th Date
+            th Nom
+            th Type
+    tbody
+        tr(ng-repeat="event in events")
+            td {{event.dateTime | date:'EEE dd/MM/yyyy'}}
+            td
+                a(ui-sref='admin.event({id:event._id})') {{event.name}}
+            td {{event.type}}
+

@@ -27,7 +27,7 @@ class EventsCtrl
         moment.locale('fr')
         moment(data).format('LL')
       DTColumnBuilder.newColumn('name').withTitle('NOM')
-      DTColumnBuilder.newColumn('loop1').withTitle('BOUCLES').withOption('defaultContent',
+      DTColumnBuilder.newColumn(null).withTitle('BOUCLES').withOption('defaultContent',
         '').renderWith _.bind(@renderLoops, @)
     ]
 

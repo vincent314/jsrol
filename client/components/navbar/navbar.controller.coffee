@@ -4,10 +4,10 @@ angular.module 'jsrolApp'
 .controller 'NavbarCtrl', ($scope, $location, Auth) ->
   $scope.menu = [{
     title: 'Home'
-    link: '/'
+    sref:'admin'
   },{
     title: 'Évènements',
-    link: '/admin/events'
+    sref:'admin.eventList'
   }
   ]
   $scope.isCollapsed = true

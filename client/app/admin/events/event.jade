@@ -1,0 +1,13 @@
+h1 Évènement
+
+p {{event.name}}
+
+
+form
+    .form-group
+        label(for="name") Nom
+        input.form-control(type="text",id="name",placeholder="Nom",ng-model="event.name")
+    .form-group
+        label(for="type") Type
+        input.form-control(type="text",id="name",placeholder="Type",ng-model="event.type")
+    button.btn.btn-default(type="submit") Envoyer
