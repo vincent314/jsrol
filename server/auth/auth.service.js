@@ -54,8 +54,8 @@ function isAdmin() {
 /**
  * Returns a jwt token signed by the app secret
  */
-function signToken(email) {
-    return jwt.sign({email: email}, config.secrets.session, {expiresInMinutes: 60 * 5});
+function signToken(email,isAdmin) {
+    return jwt.sign({email: email,isAdmin:isAdmin}, config.secrets.session, {expiresInMinutes: 60 * 5});
 }
 
 /**
@@ -63,7 +63,7 @@ function signToken(email) {
  */
 function setTokenCookie(req, res) {
     if (!req.user) return res.json(404, {message: 'Something went wrong, please try again.'});
-    var token = signToken(req.user._id, req.user.role);
+    var token = signToken(req.user.email, req.user.isAdmin);
     res.cookie('token', JSON.stringify(token));
     res.redirect('/admin');
 }

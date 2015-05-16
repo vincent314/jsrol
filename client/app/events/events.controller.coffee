@@ -23,7 +23,7 @@ class EventsCtrl
     .withBootstrap()
 
     @$scope.dtColumns = [
-      DTColumnBuilder.newColumn('dateTime').withTitle('DATE').withOption('sortable',false).renderWith (data)->
+      DTColumnBuilder.newColumn('dateTime').withTitle('DATE').withOption('sortable', false).renderWith (data)->
         moment.locale('fr')
         moment(data).format('LL')
       DTColumnBuilder.newColumn('name').withTitle('NOM')
@@ -36,7 +36,7 @@ class EventsCtrl
 #
 # render event details
 #
-  renderDetails: (d)-> d.description || ''
+  renderDetails: (d)-> "<p>#{d.description}</p>" || ''
 
 #
 # Build callback
@@ -50,7 +50,7 @@ class EventsCtrl
       self.$scope.$apply ()->
         self.clickHandler($(nRow), aData)
 
-    $('td button',nRow).bind 'click', (event) ->
+    $('td button', nRow).bind 'click', (event) ->
       mapId = $(event.target).data('map')
       event.stopPropagation();
       window.location = "/map/#{mapId}"
@@ -88,7 +88,7 @@ class EventsCtrl
     if full.loop2 then loops.push full.loop2
     if full.loop3 then loops.push full.loop3
     content = _(loops).map (l, idx)->
-      self.renderLoop l, idx+1
+      self.renderLoop l, idx + 1
     .join(' ')
     return "<div>#{content}</div>"
 

@@ -9,7 +9,8 @@ exports.setup = function (User, config) {
         },
         function (accessToken, refreshToken, profile, done) {
             User.findOne({
-                email: profile.email[0]
+                // TODO : filter on account type
+                email: profile.emails[0].value
             }, function (err, user) {
                 return done(err, user);
             });

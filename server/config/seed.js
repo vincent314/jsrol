@@ -15,16 +15,8 @@ var mongoose = require('mongoose');
 
 User.find({}).remove(function () {
     User.create({
-            provider: 'local',
-            name: 'Test User',
-            email: 'test@test.com',
-            password: 'test'
-        }, {
-            provider: 'local',
-            role: 'admin',
-            name: 'Admin',
-            email: 'admin@admin.com',
-            password: 'admin'
+            email: 'marmin.vincent@gmail.com',
+            isAdmin: true
         }, function () {
             console.log('finished populating users');
         }

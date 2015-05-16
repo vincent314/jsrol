@@ -3,9 +3,9 @@
 angular.module 'jsrolApp'
 .controller 'AdminCtrl', ($scope, $http, Auth, User) ->
 
-  $http.get '/api/users'
-  .success (users) ->
-    $scope.users = users
+  $http.get '/api/events'
+  .success (events) ->
+    $scope.events = events
 
   $scope.delete = (user) ->
     User.remove id: user._id

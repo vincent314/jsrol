@@ -57,7 +57,7 @@ angular.module 'jsrolApp'
   @return {Boolean}
   ###
   isLoggedIn: ->
-    currentUser.hasOwnProperty 'role'
+    currentUser.hasOwnProperty 'email'
 
 
   ###
@@ -73,7 +73,7 @@ angular.module 'jsrolApp'
         return
 
     else
-      callback? currentUser.hasOwnProperty 'role'
+      callback? currentUser.hasOwnProperty 'email'
 
   ###
   Check if a user is an admin
@@ -81,8 +81,7 @@ angular.module 'jsrolApp'
   @return {Boolean}
   ###
   isAdmin: ->
-    # TODO : use isAdmin boolean instead
-    currentUser.role is 'admin'
+    currentUser.isAdmin
 
 
   ###

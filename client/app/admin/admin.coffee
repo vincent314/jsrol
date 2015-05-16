@@ -6,4 +6,5 @@ angular.module 'jsrolApp'
   .state 'admin',
     url: '/admin'
     templateUrl: 'app/admin/admin.html'
-    controller: 'AdminCtrl'
+    controller: 'AdminCtrl',
+    authenticate: true

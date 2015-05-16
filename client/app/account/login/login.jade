@@ -1,25 +1,16 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-  .row
-    .col-sm-12
-      h1 Login
-      p
-        | Accounts are reset on server restart from
-        code server/config/seed.js
-        | . Default account is
-        code test@test.com
-        | /
-        code test
-      p
-        | Admin account is
-        code admin@admin.com
-        | /
-        code admin
+    .row
+        .col-sm-12
+            h1 Login
 
-    .col-sm-12
-        div
-          a.btn.btn-google-plus(href='', ng-click='loginOauth("google")')
-            i.fa.fa-google-plus
-            |  Connect with Google+
-          = ' '
-  hr
+            .alert.alert-danger(ng-show="isFailure",role="alert")
+                | Nous n'arrivons pas à vous identifier
+
+        .col-sm-12
+            div
+                a.btn.btn-google-plus(href='', ng-click='loginOauth("google")')
+                    i.fa.fa-google-plus
+                    |  Connect with Google+
+                = ' '
+    hr

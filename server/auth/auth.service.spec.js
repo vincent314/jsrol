@@ -3,8 +3,9 @@ describe('Test auth.service middleware', function () {
     var HttpStatus = require('http-status-codes');
     var express = require('express');
     var auth = require('./auth.service');
-    var app = new express();
     var User = require('../api/user/user.model');
+
+    var app = express();
 
     app.get('/', auth.isAuthenticated(), function (req, res) {
         res.send(HttpStatus.OK);

@@ -7,18 +7,18 @@ var auth = require('../auth.service');
 var router = express.Router();
 
 router
-  .get('/', passport.authenticate('google', {
-    failureRedirect: '/signup',
-    scope: [
-      'https://www.googleapis.com/auth/userinfo.profile',
-      'https://www.googleapis.com/auth/userinfo.email'
-    ],
-    session: false
-  }))
+    .get('/', passport.authenticate('google', {
+        failureRedirect: '/login?isFailure=true',
+        scope: [
+            'https://www.googleapis.com/auth/plus.login',
+            'https://www.googleapis.com/auth/plus.profile.emails.read'
+        ],
+        session: false
+    }))
 
-  .get('/callback', passport.authenticate('google', {
-    failureRedirect: '/signup',
-    session: false
-  }), auth.setTokenCookie);
+    .get('/callback', passport.authenticate('google', {
+        failureRedirect: '/login?isFailure=true',
+        session: false
+    }), auth.setTokenCookie);
 
 module.exports = router;
