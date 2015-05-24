@@ -27,6 +27,7 @@ module.exports = function (config) {
             'client/bower_components/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js',
             'client/bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js',
             'client/bower_components/leaflet/dist/leaflet.js',
+            'client/bower_components/angular-ui-date/src/date.js',
             'client/app/app.js',
             'client/app/app.coffee',
             'client/app/**/*.js',

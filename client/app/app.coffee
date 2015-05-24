@@ -8,7 +8,8 @@ angular.module 'jsrolApp', [
   'ui.bootstrap',
   'datatables',
   'datatables.bootstrap',
-  'leaflet-directive'
+  'leaflet-directive',
+  'ui.date'
 ]
 .config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) ->
   $urlRouterProvider
