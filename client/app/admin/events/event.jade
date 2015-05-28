@@ -17,6 +17,10 @@ form
 
     .form-group
         label(for="loop1") Boucle 1
-        select.form-control(id="loop1",ng-options="key as label for (key,label) in loops", ng-model="event.loop1")
+        select.form-control(id="loop1",ng-options="t.name for t in tracks track by t._id", ng-model="event.loop1")
+
+    .form-group
+        label(for="loop2") Boucle 2
+        select.form-control(id="loop2",ng-options="t.name for t in tracks track by t._id", ng-model="event.loop2")
 
     button.btn.btn-default(type="submit") Envoyer
