@@ -20,5 +20,12 @@ class AdminEventCtrl
     $scope.tracks = Track.query().$promise.then (tracks)->
       $scope.tracks = tracks
 
+    $scope.save = (event)->
+      Event.update({id: event._id}, event).$promise.then ()->
+        alert 'Sauvegarde réalisée'
+      .catch (err)->
+        console.log err
+        alert 'Erreur lors de la sauvegarde'
+
 angular.module 'jsrolApp'
 .controller 'AdminEventCtrl', AdminEventCtrl

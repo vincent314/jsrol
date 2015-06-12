@@ -1,10 +1,12 @@
 class AdminEventListCtrl
 
-  @$inject = ['$scope','$http','Event','$log']
-  constructor: (@$scope,@$http,@Event,@$log)->
-    Event.query().$promise
+  @$inject = ['$scope', '$http', 'Event', '$log']
+  constructor: (@$scope, @$http, @Event, @$log)->
+    Event.query
+      sort: '-dateTime'
+    .$promise
     .then (events)->
-      $log.info "Got #{events.length} events"
+      console.log events
       $scope.events = events
 
 angular.module 'jsrolApp'

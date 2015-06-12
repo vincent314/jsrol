@@ -2,8 +2,9 @@
 
 angular.module 'jsrolApp'
 .factory 'Event', ($resource)->
-  return $resource '/api/events/:id',{
+  return $resource '/api/events/:id',
     id:'@id'
-  }
+  ,
+    update: {method: 'PUT'}
 
 

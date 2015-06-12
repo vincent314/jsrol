@@ -5,7 +5,11 @@ var Event = require('./event.model');
 
 // Get list of events
 exports.index = function(req, res) {
-  var query = Event.find({}).sort('dateTime');
+  var query = Event.find({});
+
+  if (req.query.sort) {
+    query = query.sort(req.query.sort);
+  }
 
   if(req.query.fromDate){
     query = query.where('dateTime').gte(req.query.fromDate);

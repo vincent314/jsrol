@@ -5,7 +5,7 @@ var Track = require('./track.model');
 
 // Get list of tracks
 exports.index = function (req, res) {
-  Track.find(function (err, tracks) {
+  Track.find().select('-gpx -kml').exec(function (err, tracks) {
     if (err) {
       return handleError(res, err);
     }

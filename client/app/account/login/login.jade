@@ -1,16 +1,15 @@
 div(ng-include='"components/navbar/navbar.html"')
 .container
-    .row
-        .col-sm-12
-            h1 Login
+  .row
+    .col-md-12
+      h1 Login
 
-            .alert.alert-danger(ng-show="isFailure",role="alert")
-                | Nous n'arrivons pas à vous identifier
+      .alert.alert-danger(ng-show="isFailure",role="alert")
+        | Nous n'arrivons pas à vous identifier
 
-        .col-sm-12
-            div
-                a.btn.btn-google-plus(href='', ng-click='loginOauth("google")')
-                    i.fa.fa-google-plus
-                    |  Connect with Google+
-                = ' '
-    hr
+    .col-md-12
+      span toto
+      a.btn.btn-google-plus(href='', ng-click='loginOauth("google")')
+        i.fa.fa-google-plus
+        |  Connect with Google+
+  hr

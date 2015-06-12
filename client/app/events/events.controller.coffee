@@ -8,11 +8,9 @@ class EventsCtrl
 
     # Get data from REST service
     @$scope.dtOptions = DTOptionsBuilder.fromFnPromise ()->
-      Event.query(
-        {
-          fromDate: moment().format(),
-        }
-      )
+      Event.query
+        sort: 'dateTime'
+        fromDate: moment().format()
       .$promise
     .withOption 'paging', false
     .withOption 'sort', false

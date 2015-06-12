@@ -1,10 +1,10 @@
 h1 Évènement
 
-p {{event.name}}
-
-
-form
+form.form-horizontal(ng-submit="save(event)")
     .form-group
+      label(for="id") Id
+      input.form-control(disabled="",ng-model="event._id")
+  .form-group
         label(for="name") Nom
         input.form-control(type="text",id="name",placeholder="Nom",ng-model="event.name")
     .form-group
@@ -17,10 +17,10 @@ form
 
     .form-group
         label(for="loop1") Boucle 1
-        select.form-control(id="loop1",ng-options="t.name for t in tracks track by t._id", ng-model="event.loop1")
+      select.form-control(id="loop1",ng-options="t._id as t.name for t in tracks", ng-model="event.loop1")
 
     .form-group
         label(for="loop2") Boucle 2
-        select.form-control(id="loop2",ng-options="t.name for t in tracks track by t._id", ng-model="event.loop2")
+      select.form-control(id="loop2",ng-options="t._id as t.name for t in tracks", ng-model="event.loop2")
 
     button.btn.btn-default(type="submit") Envoyer
