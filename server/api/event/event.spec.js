@@ -6,6 +6,8 @@ var request = require('supertest');
 var Event = require('./event.model');
 var Q = require('q');
 var _ = require('lodash');
+var Log4js = require('log4js');
+var logger = Log4js.getLogger('EventSpec');
 
 describe('GET /api/events', function () {
 
@@ -98,7 +100,7 @@ describe('GET /api/events', function () {
                 res.body[0].name.should.equal('Event2');
                 done();
             }).catch(function (err) {
-                console.log(err);
+                logger.error(err);
                 done(err);
             });
         });
@@ -117,7 +119,7 @@ describe('GET /api/events', function () {
                 res.body[0].name.should.equal('Event1');
                 done();
             }).catch(function (err) {
-                console.log(err);
+                logger.error(err);
                 done(err);
             });
         });
@@ -126,6 +128,7 @@ describe('GET /api/events', function () {
                 expect(results.length).to.equal(2);
                 var r = request(app)
                     .get('/api/events')
+                    .query({sort: 'dateTime'})
                     .expect(200)
                     .expect('Content-Type', /json/);
                 return Q.ninvoke(r, 'end');
@@ -136,7 +139,7 @@ describe('GET /api/events', function () {
                 res.body[1].name.should.equal('Event2');
                 done();
             }).catch(function (err) {
-                console.log(err);
+                logger.error(err);
                 done(err);
             });
         });

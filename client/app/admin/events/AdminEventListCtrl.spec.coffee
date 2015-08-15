@@ -48,7 +48,7 @@ describe 'Test AdminEventListCtrl', ->
 
   it 'Should list all events', ()->
 #    Mock list of events from REST api
-    $httpBackend.whenGET('/api/events').respond mockEventList
+      $httpBackend.whenGET('/api/events?sort=-dateTime').respond mockEventList
     waits(0)
 
     scope = $rootScope.$new()

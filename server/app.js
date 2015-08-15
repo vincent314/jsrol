@@ -1,7 +1,8 @@
 /**
  * Main application file
+ *
  */
-
+/* global exports */
 'use strict';
 
 // Set default node environment to development
@@ -11,9 +12,11 @@ var express = require('express');
 var mongoose = require('mongoose');
 var config = require('./config/environment');
 var cors = require('cors');
+var Log4js = require('log4js');
+var logger = new Log4js.getLogger('app');
 
 // Connect to database
-console.log('mongo uri = ' + config.mongo.uri);
+logger.debug('mongo uri = ' + config.mongo.uri);
 mongoose.connect(config.mongo.uri, config.mongo.options);
 
 // Debug Mongoose
@@ -37,4 +40,4 @@ server.listen(config.port, config.ip, function () {
 });
 
 // Expose app
-exports = module.exports = app;
+module.exports = app;
